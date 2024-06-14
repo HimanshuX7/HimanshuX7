@@ -9,8 +9,8 @@ from flask import Flask
 # nltk
 nltk.download("words")
 
-API_ID = os.environ.get("API_ID") 
-API_HASH = os.environ.get("API_HASH") 
+API_ID = os.environ.get("API_ID")
+API_HASH = os.environ.get("API_HASH")
 SESSION = os.environ.get("SESSION")
 
 # Bot
@@ -21,7 +21,7 @@ app = Client(
     session_string='1BVtsOIkBu38DsnUGq3jKptlobe6R6cL7k8V939X1Q1VtDiXuPP3dNtOOiy683XoneTLM67utn_MvTSHgPf85zsGqF_91h69ZzrCFevgFFn4sUJdZlqk_UGArp895Lhcr21sgXc7DdmTgIcLatlAxOO6eoLvhkhNN5Tt3z4lrJRL1Fuw7V8GgaqnVjBIDscamRgt5o3KNdjByAYOAt-Kiz3D8zCwFU-17tSUq47WVu70GZF-ivOn1a7piexW0mm6BA15g0i9sU3ulAqFehjcj0jy0BTVaBBULLzldMuCK8502CXQuaVATokndLpBLQpiNvC5X-D3cxCl35reFdwgY9VI21Qw8AAs='
 )
 
-server = Flask(name)
+server = Flask(__name__)
 
 @server.route("/")
 def home():
@@ -67,7 +67,7 @@ def handle_incoming_message(client, message):
 def run():
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 8080)))
 
-if name == "main":
+if __name__ == "main":
     t = Thread(target=run)
     t.start()
     app.run()
